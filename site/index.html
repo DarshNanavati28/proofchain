@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f5f4ef">
+  <meta name="description" content="Create and verify document integrity proofs in your browser with ProofChain.">
+  <title>ProofChain — document integrity, made checkable</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#top" aria-label="ProofChain home">
+      <span class="brand-mark" aria-hidden="true">P</span>
+      <span>ProofChain</span>
+    </a>
+    <nav aria-label="Main navigation">
+      <a href="#how">How it works</a>
+      <a class="nav-link" href="https://github.com/DarshNanavati28/proofchain" target="_blank" rel="noreferrer">GitHub <span aria-hidden="true">↗</span></a>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow"><span class="live-dot"></span> LOCAL-FIRST DOCUMENT INTEGRITY</p>
+        <h1>Proof you can<br><em>check for yourself.</em></h1>
+        <p class="hero-text">Build a Merkle proof for a batch of text records, then verify it against a published root. Your documents stay in this browser.</p>
+        <a class="text-link" href="#workspace">Try the browser demo <span aria-hidden="true">↓</span></a>
+      </div>
+      <aside class="hero-card" aria-label="How ProofChain works">
+        <div class="card-top"><span class="mini-label">THE IDEA</span><span class="status-pill">NO SERVER</span></div>
+        <div class="flow">
+          <div class="flow-item"><span class="flow-icon">01</span><span><strong>Document</strong><small>Canonical UTF-8 text</small></span></div>
+          <span class="flow-line"></span>
+          <div class="flow-item"><span class="flow-icon">02</span><span><strong>Fingerprint</strong><small>SHA-256 Merkle root</small></span></div>
+          <span class="flow-line"></span>
+          <div class="flow-item"><span class="flow-icon">03</span><span><strong>Proof</strong><small>Check it independently</small></span></div>
+        </div>
+        <div class="privacy-note"><span aria-hidden="true">↗</span> Processing happens on your device</div>
+      </aside>
+    </section>
+
+    <section class="workspace-section" id="workspace">
+      <div class="section-heading">
+        <div><p class="eyebrow">INTERACTIVE DEMO</p><h2>Make a proof. Check a proof.</h2></div>
+        <p>Each non-empty line is one UTF-8 text record. Choose a line to prove it belongs to the batch.</p>
+      </div>
+      <div class="workspace">
+        <article class="panel">
+          <div class="panel-heading"><span class="step-number">01</span><div><h3>Create a batch</h3><p>Build a root and an inclusion proof.</p></div></div>
+          <label for="records">Text records <span class="label-hint">one record per line</span></label>
+          <textarea id="records" rows="7" spellcheck="false">Certificate 1 | University X | 2026-01-01
+Certificate 2 | University X | 2026-01-02
+Certificate 3 | University X | 2026-01-03
+Certificate 4 | University X | 2026-01-04
+Certificate 5 | University X | 2026-01-05</textarea>
+          <div class="field-row">
+            <label for="record-index">Record to prove</label>
+            <input id="record-index" type="number" min="1" value="3" inputmode="numeric">
+          </div>
+          <button id="create-proof" class="button button-dark" type="button">Create proof <span aria-hidden="true">→</span></button>
+          <p id="build-status" class="status" role="status" aria-live="polite">Your input is ready to process locally.</p>
+          <div class="root-box"><span class="mini-label">BATCH ROOT</span><code id="generated-root">Create a proof to see the root</code></div>
+        </article>
+
+        <article class="panel">
+          <div class="panel-heading"><span class="step-number">02</span><div><h3>Verify membership</h3><p>Compare a document and proof with a trusted root.</p></div></div>
+          <label for="document">Document text</label>
+          <textarea id="document" rows="3" spellcheck="false" placeholder="Create a proof or paste the document text"></textarea>
+          <label for="proof">Proof JSON</label>
+          <textarea id="proof" class="proof-input" rows="5" spellcheck="false" placeholder="Create a proof or paste proof JSON"></textarea>
+          <label for="trusted-root">Trusted published root</label>
+          <input id="trusted-root" class="root-input" type="text" spellcheck="false" placeholder="Paste the root from a trusted source">
+          <button id="verify-proof" class="button button-accent" type="button">Verify document <span aria-hidden="true">→</span></button>
+          <p id="verify-status" class="status" role="status" aria-live="polite">Verification runs in your browser.</p>
+        </article>
+      </div>
+      <p class="trust-note"><span aria-hidden="true">ⓘ</span> A proof can repeat its own root. For meaningful verification, compare it with a root published through a separate trusted channel.</p>
+    </section>
+
+    <section class="how-section" id="how">
+      <div class="how-intro"><p class="eyebrow">SMALL TOOL, CLEAR BOUNDARIES</p><h2>Integrity is a check.<br>Trust still has a source.</h2></div>
+      <div class="how-grid">
+        <article><span class="how-index">A</span><h3>Canonicalize</h3><p>Text is normalized to Unicode NFC and consistent line endings, so equivalent text yields the same fingerprint.</p></article>
+        <article><span class="how-index">B</span><h3>Commit</h3><p>Each document becomes a leaf in a SHA-256 Merkle tree. A compact path proves inclusion without the full batch.</p></article>
+        <article><span class="how-index">C</span><h3>Verify</h3><p>The independent verifier recomputes the root. A trusted published root is needed to detect a forged or replaced proof.</p></article>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <a class="brand" href="#top"><span class="brand-mark" aria-hidden="true">P</span><span>ProofChain</span></a>
+    <p>Static demo · Local processing · SHA-256</p>
+    <a href="https://github.com/DarshNanavati28/proofchain" target="_blank" rel="noreferrer">Source code <span aria-hidden="true">↗</span></a>
+  </footer>
+</body>
+</html>

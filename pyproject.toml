@@ -1,0 +1,19 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "proofchain"
+version = "1.0.0"
+description = "Local document integrity registry with independently verifiable Merkle proofs"
+readme = "README.md"
+requires-python = ">=3.10"
+authors = [{ name = "Darsh Nanavati" }]
+dependencies = []
+
+[project.scripts]
+proofchain-demo = "proofchain.demo:main"
+proofchain-verify = "proofchain.verifier:main"
+
+[tool.setuptools.packages.find]
+include = ["proofchain*"]
