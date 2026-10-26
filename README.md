@@ -15,7 +15,9 @@ The verifier can prove that a document matches a published root. It cannot prove
 
 ## Browser demo
 
-Serve the site locally with python -m http.server 8000 --directory site, or use the GitHub Pages site after deployment. Enter one text document per line, create a proof, then edit the document or proof and check the result. The root is shown separately so you can see the difference between a proof's own claim and a trusted root.
+Live demo: https://darshnanavati28.github.io/proofchain/
+
+Serve the site locally with python -m http.server 8000 --directory site. Enter one text document per line, create a proof, then edit the document or proof and check the result. The root is shown separately so you can see the difference between a proof's own claim and a trusted root.
 
 ## Python quick start
 
